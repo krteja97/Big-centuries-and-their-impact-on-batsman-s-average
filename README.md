@@ -12,4 +12,19 @@ these are the correlation coefficients between three variables.
 
 high correlation is observed
 so hypothesis is correct
-# Big-centuries-and-their-impact-on-batsman-s-average
+
+# comparison between england players of 1990's and 2000's
+
+the england_stats.sqlite file contains their details..
+the ratios are around 0.20-0.27 for 1990's
+and 0.30-0.41 for 2000's
+
+# comparision between australian players and english players
+
+the england_stats.sqlite file contains their details..
+the ratios are around 0.20-0.27 for 1990's players
+
+the australian_stats.sqlite file contains details for aussies.
+their ratios are around 0.30-0.45 in some cases..
+
+thats the difference i guess
