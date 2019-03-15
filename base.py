@@ -2,6 +2,7 @@ import database_methods as db;
 import player_ids as pd;
 import extractor as tb;
 from correlation_finder import main_correlation_finder;
+import consistency_factor as cf;
 
 import sqlite3
 import urllib.request, urllib.parse, urllib.error
@@ -25,22 +26,26 @@ for pid in pd.player_ids:
 		acct = cur.fetchone()[0]
 		continue
 	except:
-		url = tb.create_normal_url(pid);
-		curl = tb.create_centuries_url(pid);
+		try:
+			url = tb.create_normal_url(pid);
+			curl = tb.create_centuries_url(pid);
 
-		arg1 = tb.playerProfile(url);
-		arg2 = tb.playerCenturies(curl);
-		inningsperhundreds = arg1['innings']/arg1['hundreds'];
-		ratio = arg2['runs_in_hundreds']/arg1['total_runs'];
+			arg1 = tb.playerProfile(url);
+			arg2 = tb.playerCenturies(curl);
+			inningsperhundreds = arg1['innings']/arg1['hundreds'];
+			ratio = arg2['runs_in_hundreds']/arg1['total_runs'];
 
-		cur.execute('''insert into players (pid, player_name, innings, total_runs, runs_in_hundreds, average, hundreds,
+			cur.execute('''insert into players (pid, player_name, innings, total_runs, runs_in_hundreds, average, hundreds,
 						inningsperhundreds, ratio) values(?,?,?,?,?,?,?,?,?) ''', (pid, arg1['player_name'], arg1['innings'] ,
 						arg1['total_runs'] , arg2['runs_in_hundreds'] , arg1['average'] , arg1['hundreds'] , inningsperhundreds, ratio,));
-		conn.commit();
+			conn.commit();
+		except:
+			conn.commit();
 
 cur.close();
 
-main_correlation_finder(dbname);
+#main_correlation_finder(dbname);
+#cf.consistency_factor('stats.sqlite');
 
 
 

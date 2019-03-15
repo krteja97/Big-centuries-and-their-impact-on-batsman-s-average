@@ -10,7 +10,9 @@ base_player_url = "http://www.howstat.com/cricket/statistics/Players/PlayerOverv
 
 
 def create_normal_url(x):
-	if(x < 1000):
+	if(x < 100):
+		url = base_player_url + '00' + str(x);
+	elif(x < 1000):
 		url = base_player_url + '0' + str(x);
 	else:
 		url = base_player_url + str(x);
@@ -18,7 +20,9 @@ def create_normal_url(x):
 	return url;
 
 def create_centuries_url(x):
-	if(x < 1000):
+	if(x < 100):
+		curl = base_centuries_url + '00' + str(x) + '&s=2'
+	elif(x < 1000):
 		curl = base_centuries_url + '0' + str(x) + '&s=2'
 	else:
 		curl = base_centuries_url + str(x) + '&s=2'
