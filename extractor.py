@@ -7,6 +7,7 @@ from bs4 import BeautifulSoup
 #base links for web scrapping
 base_centuries_url = "http://www.howstat.com/cricket/statistics/Players/PlayerNotables.asp?PlayerID="
 base_player_url = "http://www.howstat.com/cricket/statistics/Players/PlayerOverview.asp?PlayerId=";
+base_progress_url = "http://www.howstat.com/cricket/Statistics/Players/PlayerProgressBat.asp?PlayerID=";
 
 
 def create_normal_url(x):
@@ -28,6 +29,7 @@ def create_centuries_url(x):
 		curl = base_centuries_url + str(x) + '&s=2'
 	print(curl);
 	return curl;
+
 
 
 def get_player_name(soup):

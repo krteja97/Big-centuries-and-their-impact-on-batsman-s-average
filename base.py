@@ -3,6 +3,7 @@ import player_ids as pd;
 import extractor as tb;
 from correlation_finder import main_correlation_finder;
 import consistency_factor as cf;
+import player_progress as pp;
 
 import sqlite3
 import urllib.request, urllib.parse, urllib.error
