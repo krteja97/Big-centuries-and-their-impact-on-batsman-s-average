@@ -8,15 +8,23 @@ def main_correlation_finder(db_name):
 	cur = my_list[0];
 	conn = my_list[1];
 
-	list1 = cur.execute('select average from players');
+	list1 = cur.execute('select average from players where innings > 35');
 	average_list = list1.fetchall();
 	average_list = [x[0] for x in average_list];
-	list1 = cur.execute('select ratio from players');
+	list1 = cur.execute('select ratio from players where innings > 35');
 	ratio_list = list1.fetchall();
 	ratio_list = [x[0] for x in ratio_list];
-	list1 = cur.execute('select inningsperhundreds from players');
+	list1 = cur.execute('select inningsperhundreds from players where innings > 35');
 	iph_list = list1.fetchall();
 	iph_list = [x[0] for x in iph_list];
+	stddev_list = cur.execute('select std_deviation from players where innings > 35');
+	stddev_list = stddev_list.fetchall();
+	stddev_list = [x[0] for x in stddev_list];
+
+	stddev2_list = cur.execute('select stddev2 from players where innings > 35');
+	stddev2_list = stddev2_list.fetchall();
+	stddev2_list = [x[0] for x in stddev2_list];		
+
 	
 
 	hpi_list = [];
@@ -28,9 +36,13 @@ def main_correlation_finder(db_name):
 	print(np.corrcoef(iph_list,average_list)[0,1]);
 	print(np.corrcoef(hpi_list,ratio_list)[0,1]);
 	print(np.corrcoef(hpi_list,average_list)[0,1]);
+	print(np.corrcoef(average_list,stddev_list)[0,1]);
+	print(np.corrcoef(stddev2_list,average_list)[0,1]);
+	print(np.corrcoef(stddev2_list,ratio_list)[0,1]);
+	print(np.corrcoef(stddev2_list,hpi_list)[0,1]);
 
-
-	plt.plot(hpi_list,ratio_list);
+	plt.scatter(hpi_list,ratio_list, color = 'red')
+	#plt.plot(hpi_list,ratio_list);
 	plt.xlabel('hpi - axis')  
 	plt.ylabel('ratio - axis') 
 	plt.show();
@@ -43,5 +55,6 @@ def main_correlation_finder(db_name):
 # 0.9335265302923701
 
 # the correlation coefficients for above problem statement,very high, hypothesis is correct
+main_correlation_finder('stats.sqlite');
 
 

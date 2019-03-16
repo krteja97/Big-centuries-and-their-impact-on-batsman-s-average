@@ -1,14 +1,27 @@
 # Big-centuries-and-their-impact-on-batsman-s-career-average
 
-0.8215157467745133
-0.9053118438658443
-0.9335265302923701
+there is a high correlation between some of the parameters that i have taken into account.
 
-these are the correlation coefficients between three variables.
+1) batting average (average)
+2) ratio between runs scored in hundreds and total runs scored(ratio)
+3) hundreds per innings(hpi)
+4) standard deviation for all the innings played without notouts(stddev2)
+5) innings per hundred(iph)
+6) std deviation for all innings with notouts(stddev)
 
-1) batting average 
-2) ratio between runs scored in hundreds and total runs scored
-3) hundreds per innings
+the correlation coefficient observed for these cases: (minimum of 35 innings and any batsman who has
+ scored atleast a century in test matches):
+
+	(average,ratio) 	0.78
+	(iph,ratio)			-0.75
+	(iph,average)		-0.64
+	(hpi,ratio)			0.95
+	(hpi,average)		0.89
+	(average,stddev)	0.90
+	(stddev2,average)	0.88
+	(stddev2,ratio)		0.91
+	(stddev2,hpi)		0.90
+
 
 high correlation is observed
 so hypothesis is correct
@@ -28,3 +41,11 @@ the australian_stats.sqlite file contains details for aussies.
 their ratios are around 0.30-0.45 in some cases..
 
 thats the difference i guess
+
+# using machine learning algorithms for prediction of parameters
+
+85% accuracy was achieved using linear regression when predicting average by using hundredsperinnings
+64% accuracy was achieved using linear regression when predicting average by using ratio
+
+decision trees fared poorly only with accuracy of ~55%
+multi variable regression also fared poorly with accuracy of ~20% when predicting average with hundredsperinnings and ratio
