@@ -4,6 +4,7 @@ import numpy as np;
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plot
+from sklearn import preprocessing
 
 
 db_name = 'stats.sqlite'
@@ -14,9 +15,6 @@ average_list = cur.execute('select average from players where innings > 50');
 average_list = average_list.fetchall();
 average_list = [x[0] for x in average_list];
 
-list1 = cur.execute('select ratio from players where innings > 50');
-ratio_list = list1.fetchall();
-ratio_list = [x[0] for x in ratio_list];
 list1 = cur.execute('select inningsperhundreds from players where innings > 50');
 iph_list = list1.fetchall();
 iph_list = [x[0] for x in iph_list];    
@@ -24,6 +22,13 @@ iph_list = [x[0] for x in iph_list];
 hpi_list = [];
 for x in iph_list:
 	hpi_list.append(1/x);
+
+#plot.scatter(average_list,hpi_list);
+#plot.show();
+
+#average_list = preprocessing.scale(average_list);
+ratio_list = preprocessing.scale(hpi_list);
+
 
 average_list = np.array(average_list).reshape(-1,1);
 ratio_list = np.array(ratio_list).reshape(-1,1);
@@ -33,14 +38,13 @@ linearRegressor = LinearRegression();
 
 linearRegressor.fit(xTrain, yTrain);
 print(linearRegressor.coef_)
-yPrediction = linearRegressor.predict(xTest)
+yPrediction = linearRegressor.predict(xTest)	
 
-print(len(average_list))
 
 plot.scatter(xTrain, yTrain, color = 'red')
 plot.plot(xTrain, linearRegressor.predict(xTrain), color = 'blue')
 plot.title('average vs ratio (Training set)')
-plot.xlabel('ratio')
+plot.xlabel('iph')
 plot.ylabel('average')
 
 
@@ -58,5 +62,3 @@ i = 0;
 for x in yTest:
 	print(x, yPrediction[i]);
 	i = i + 1;
-
-
