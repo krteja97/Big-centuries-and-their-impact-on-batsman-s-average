@@ -42,10 +42,3 @@ their ratios are around 0.30-0.45 in some cases..
 
 thats the difference i guess
 
-# using machine learning algorithms for prediction of parameters
-
-85% accuracy was achieved using linear regression when predicting average by using hundredsperinnings
-64% accuracy was achieved using linear regression when predicting average by using ratio
-
-decision trees fared poorly only with accuracy of ~55%
-multi variable regression also fared poorly with accuracy of ~20% when predicting average with hundredsperinnings and ratio
